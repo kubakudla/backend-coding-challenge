@@ -48,4 +48,14 @@ app.controller("ctrlExpenses", ["$rootScope", "$scope", "config", "restalchemy",
 	// Initialise scope variables
 	loadExpenses();
 	$scope.clearExpense();
+
+	// Update Vat amount
+		$scope.$watch('newExpense.amount', function (value) {
+			value = (value) ? value.replace(',','.') : '';
+			value = (value) ? value.toUpperCase().replace('EUR','') : '';
+			
+			$scope.vat = (value.match(/^[0-9]{0,9}(\.[0-9]{1,2})?(\\s)?(EUR|eur)?/)) ? '(VAT: ' +Math.round((value / 6) * 100) / 100  + ' )' : '';
+			//Math.round(value * 20) / 100 + ' )
+		});
+
 }]);

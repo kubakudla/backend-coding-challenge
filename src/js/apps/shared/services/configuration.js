@@ -4,6 +4,6 @@ var app = angular.module("alchemytec.config", []);
 var gulpEnvConfig = { /*{{gulp-env-config}}*/ };
 
 app.constant("config", {
-	apiroot: gulpEnvConfig.apiroot,
+	apiroot: 'http://localhost:8081/challenge/api',
 	staticRoot: gulpEnvConfig.staticRoot
 });

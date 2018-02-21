@@ -9,19 +9,22 @@
 		<ul>
 			<li>
 				<label>Date</label>
-				<input type="text" ng-required="true" ng-model="newExpense.date" ui-date="dateOptions" placeholder="dd/mm/yyyy" />
+				<input type="text" name="date" ng-required="true" ng-model="newExpense.date" ng-pattern="'(0[1-9]|[12][0-9]|3[01])[/](0[1-9]|1[012])[/](20)[0-9]{2}$'" ui-date="dateOptions" placeholder="dd/mm/yyyy" />
+				<span style="color:Red" ng-show="expensesform.date.$error.pattern">Format: 'dd/MM/yyyy', since year 2000</span>
 			</li>
 			<li>
 				<label>Amount</label>
-				<input type="text" ng-required="true" ng-model="newExpense.amount" placeholder="00.00" />
+				<input type="text" name="amount" ng-required="true" ng-model="newExpense.amount" ng-pattern="'^[0-9]{0,9}(\.[0-9]{1,2})?(\\s)?(EUR|eur)?'" placeholder="00.00" /> {{vat}}
+				<span style="color:Red" ng-show="expensesform.amount.$error.pattern">Format: '1.2 or 1.23 EUR'</span>
 			</li>
 			<li>
 				<label>Reason</label>
-					<textarea at-auto-resize ng-required="true" ng-model="newExpense.reason" ng-trim="false" placeholder="why oh why?"></textarea>
+					<textarea at-auto-resize ng-required="true" name="reason" ng-model="newExpense.reason" ng-maxlength="255" ng-trim="false" placeholder="why oh why?"></textarea>
+					<span style="color:Red" ng-show="expensesform.reason.$error.maxlength">Max length is 255 characters</span>
 			</li>
 			<li>
 				<label></label>
-				<button ng-click="saveExpense()" class="solid">Save Expense</button> <button ng-click="clearExpense()">cancel</button>
+				<button ng-click="saveExpense()" ng-disabled="!expensesform.$valid" class="solid">Save Expense</button> <button ng-click="clearExpense()">cancel</button>
 			</li>
 		</ul>
 	</form>
