@@ -17,7 +17,7 @@ mvn package
 java -jar target/expense.jar
 
 4) run front end from the main folder:
-
+npm install
 gulp
 
 5) available urls:
